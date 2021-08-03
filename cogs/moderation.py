@@ -1,6 +1,20 @@
-import discord, arrow, asyncpg
+import discord, arrow, asyncpg, json
 from discord.ext import commands, tasks
-from database import mute_user, update
+from bot_configuration import mute_user, update
+
+with open("settings.json") as settings_file:
+    settings = json.load(settings_file)
+    settings_file.close()
+    
+owner_id = settings["owner"]
+
+def owner_or_permissions(**perms):
+    original = commands.has_permissions(**perms).predicate
+    async def extended_check(ctx):
+        if ctx.guild is None:
+            return False
+        return owner_id == ctx.author.id or await original(ctx)
+    return commands.check(extended_check)
 
 class Moderation(commands.Cog):
 
@@ -12,7 +26,7 @@ class Moderation(commands.Cog):
     
     @commands.command(aliases=["mutetemp, tempmute"])
     @commands.guild_only()
-    @commands.check(moderationcheck)
+    @owner_or_permissions(administrator=True)
     async def temp_mute(self, ctx, member: discord.Member, time_in_sec: int, reason:str = None):
         """
         Temporary mute command, time must be set in seconds.
@@ -50,6 +64,6 @@ class Moderation(commands.Cog):
                 mute_user.remove(guild_id=each[1], user_id=each[0]) #We remove the row from the database.
             except Exception:
                 pass
-   
+      
 def setup(client):
     client.add_cog(Moderation(client))
