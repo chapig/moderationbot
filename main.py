@@ -1,12 +1,18 @@
-import discord, os
+import discord, os, json
 from discord.ext import commands
-
-token = ""
 cogs = ["cogs.moderation"]
 
 intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
+
+def bot_token():
+    with open("settings.json") as settings_file:
+        settings = json.load(settings_file)
+        settings_file.close()
+    return settings["bot_token"]
+
+
 
 class Bot(commands.AutoShardedBot):
     
@@ -33,4 +39,7 @@ class Bot(commands.AutoShardedBot):
             
         print("Bot is now running.")
 
-Bot().run(token)
+try:
+    Bot().run(bot_token())
+except discord.errors.LoginFailure:
+    print("An error has occured with your token, make sure to place it in your settings.json and also make sure it is a valid token.")
