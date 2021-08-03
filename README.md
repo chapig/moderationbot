@@ -1,4 +1,4 @@
-##Installation
+## Installation
 ```
 git clone https://github.com/chapig/moderationbot.git
 cd moderationbot
