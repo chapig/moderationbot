@@ -34,3 +34,32 @@ Options:
     }
 }
 ```
+### Example of basic configuration of settings.json
+```json
+{
+    "owner": {
+        "id": "282598235003158528"
+    },
+    
+    "bot_token": "11111111111111111111111111111111",
+
+    "database": {
+
+        "default": true,
+        
+        "host": "localhost",
+        "user": "root",
+        "password": "root",
+
+        "custom": {
+            "name": "",
+            "user_id_column_name": "",
+            "guild_id_column_name": "",
+            "istemporary_mute_column_name": "",
+            "ismuted_column_name": "",
+            "muted_until_column_name": "",
+            "table": ""
+        }
+    }
+}
+```
