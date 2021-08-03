@@ -12,7 +12,7 @@ Options:
         "id": ""
     },
     
-    "bot_token": "NzE3OTM1MjAyNzg5MzU5NjI3.XthjQg.0-jAiJLLuImHSrjNzbW0kV7KO8I",
+    "bot_token": "",
 
     "database": {
 
