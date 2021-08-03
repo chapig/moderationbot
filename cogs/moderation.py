@@ -1,6 +1,6 @@
 import discord, arrow, asyncpg, json
 from discord.ext import commands, tasks
-from bot_configuration import mute_user, update
+from database import mute_user, update
 
 with open("settings.json") as settings_file:
     settings = json.load(settings_file)
