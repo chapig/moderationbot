@@ -1,3 +1,15 @@
+##Installation
+```
+git clone https://github.com/chapig/moderationbot.git
+cd moderationbot
+pip install --user --requirement requirements.txt
+
+or
+
+pip3 install --user --requirement requirements.txt
+#Use this if you have different Python versions. 
+```
+
 ## How to set up settings.json
 
 
