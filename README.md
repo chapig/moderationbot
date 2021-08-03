@@ -2,11 +2,11 @@
 ```
 git clone https://github.com/chapig/moderationbot.git
 cd moderationbot
-pip install --user --requirement requirements.txt
+pip install --requirement requirements.txt
 
 or
 
-pip3 install --user --requirement requirements.txt
+pip3 install --requirement requirements.txt
 #Use this if you have different Python versions. 
 ```
 ## Installation of MySQL
