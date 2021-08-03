@@ -23,9 +23,6 @@ Options:
         "password": "",
 
         "custom": {
-            "host": "",
-            "user": "",
-            "password": "",
             "name": "",
             "user_id_column_name": "",
             "guild_id_column_name": "",
