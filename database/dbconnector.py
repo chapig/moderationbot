@@ -2,6 +2,17 @@ import mysql.connector
 from mysql.connector import connection
 import json 
 
+class Conn:
+  
+  def __init__(self):
+    
+    self.cnx = mysql.connector.connect(  host=settings["database"]["host"],
+                                          user=settings["database"]["user"],
+                                          password=settings["database"]["password"],
+                                          database=database_name)
+    self.cursor = self.cnx.cursor()
+
+
 with open("settings.json") as settings_file:
     settings = json.load(settings_file)
     settings_file.close()
@@ -16,6 +27,14 @@ if settings["database"]["default"] == True:
   ismuted_column_name = "ismuted" #DEFAULT
   muted_until_column_name =  "muteduntil" #DEFAULT
   
+  try:
+    
+    conn = Conn()
+    conn.cursor.execute(f"CREATE DATABASE {database_name}")
+    
+  except Exception:
+    pass
+  
 elif settings["database"]["default"] == False:
   
   database_name = settings["database"]["custom"]["name"]  
@@ -24,15 +43,6 @@ elif settings["database"]["default"] == False:
   database_user = settings["database"]["custom"]["user"]
   database_password = settings["database"]["custom"]["password"] 
 
-class Conn:
-  
-  def __init__(self):
-    
-    self.cnx = mysql.connector.connect(  host=settings["database"]["host"],
-                                          user=settings["database"]["user"],
-                                          password=settings["database"]["password"],
-                                          database=database_name)
-    self.cursor = self.cnx.cursor()
 
 
 class Everyone:
