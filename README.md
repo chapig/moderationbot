@@ -1,4 +1,4 @@
-## Installation
+## Installation of the bot
 ```
 git clone https://github.com/chapig/moderationbot.git
 cd moderationbot
@@ -9,7 +9,11 @@ or
 pip3 install --user --requirement requirements.txt
 #Use this if you have different Python versions. 
 ```
-
+## Installation of MySQL
+```
+sudo apt-get update
+sudo apt-get install mysql-server
+```
 ## How to set up settings.json
 
 
