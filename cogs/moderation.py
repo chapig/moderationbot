@@ -48,6 +48,41 @@ class Moderation(commands.Cog):
                 
         else:
             await ctx.send(":exclamation: Before using this command, make sure to create a role named `Muted`.")
+            
+    @commands.command()
+    @commands.guild_only()
+    @owner_or_permissions(administrator=True)
+    async def mute(self, ctx, member: discord.Member, reason:str = None):
+        """
+        Mute command.
+        """
+        
+        role = discord.utils.get(ctx.guild.roles, name="Muted")
+        
+        if role is not None:
+            await member.add_roles(role, reason=reason if reason is not None else 'Mute was applied to this user.')
+            await ctx.send(f"> Member **{member.mention}** was **succesfully** muted \n> **Reason for mute:** {reason if reason is not None else 'Mute was applied to this user.'}")
+        else:
+            await ctx.send(":exclamation: Before using this command, make sure to create a role named `Muted`.")
+            
+    @commands.command()
+    @commands.guild_only()
+    @owner_or_permissions(administrator=True)
+    async def unmute(self, ctx, member: discord.Member, reason:str = None):
+        """
+        Temporary mute command, time must be set in seconds.
+        """
+        
+        role = discord.utils.get(ctx.guild.roles, name="Muted")
+        
+        if role is not None:
+    
+            mute_user.remove(guild_id=ctx.guild.id, user_id=member.id)
+            await member.remove_roles(role, reason=reason if reason is not None else 'Temporary mute was applied to this user.')
+            await ctx.send(f"> Member **{member.mention}** was **succesfully** unmuted. \n> **Reason for unmute:** {reason if reason is not None else 'Mute was unapplied to this user.'}")
+        
+        else:
+            await ctx.send(":exclamation: Before using this command, make sure to create a role named `Muted`.")
         
     @tasks.loop(seconds=5.0)
     async def unmutecheck(self):
@@ -64,6 +99,10 @@ class Moderation(commands.Cog):
                 mute_user.remove(guild_id=each[1], user_id=each[0]) #We remove the row from the database.
             except Exception:
                 pass
-      
+            
+            
+            
+                
+        
 def setup(client):
     client.add_cog(Moderation(client))
