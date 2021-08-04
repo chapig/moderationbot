@@ -20,7 +20,7 @@ sudo apt-get install mysql-server
 Edit your `settings.json` file before starting your bot.
 Options:
 
-`default`: Leave it as `true` if you want the bot to create the table by its own, this won't create a database though, you will need to do that. When using a custom database configuration set `default` as `false`.
+`default`: Leave it as `true` if you want the bot to create the table by its own. When using a custom database configuration set `default` as `false`.
 
 ```json
 {
